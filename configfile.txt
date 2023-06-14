@@ -1,0 +1,193 @@
+
+install helm 
+
+ chmod 700 get_helm.sh
+./get_helm.s
+helm repo update
+
+
+
+Add repos
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo update
+
+
+install chart
+
+helm install prometheus prometheus-community/kube-prometheus-stack
+
+
+Installing Helm
+
+In this lesson, we will see how to get Helm installed and interacting with our Kubernetes cluster. We will also talk about Helm architecture.
+
+Commands used in this lesson:
+
+curl -fsSL -o helm.tar.gz https://get.helm.sh/helm-v3.4.1-linux-amd64.tar.gz
+
+tar -xzf helm.tar.gz
+
+helm version
+
+helm repo add stable https://charts.helm.sh/stable
+
+helm repo update
+
+helm search repo wordpress
+
+helm install demowp stable/wordpress
+
+helm ls
+
+
+
+
+==========================================================================================================================================
+kubectl installation 
+
+{
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl=1.22.1-00
+}
+====================================================================================================================================
+docker installation
+curl -SSL https://get.docker.com/ | sh 
+
+=======================================================================================================================================
+
+helm delete demowp
+
+installation method 2
+Install and Configure Helm
+Run the wget command with the tar file provided for the lab to install Helm.
+
+$ wget https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz
+Run the ls command to ensure the tar file is included.
+
+$ ls
+Run the tar -xzf and ls -l commands to extract and view the file and the related linux-amd64 folder.
+
+$ tar -xzf helm-v3.9.0-linux-amd64.tar.gz
+$ ls -l
+Run the ls -l command to view the linux-amd64 folder. The helm executable binary is located in this folder.
+
+$ ls -l ./linux-amd64/
+Run the mv command to move the helm executable to the /usr/local/bin/ directory.
+
+$ mv ./linux-amd64/helm /usr/local/bin/
+If you receive a "Permission denied" error, run the sudo !! command and use the password provided for the lab.
+
+$ sudo !!
+Run the ls -l command on the /usr/local/bin/ directory to ensure the helm binary is still owned by cloud_user and can still be run.
+
+$ ls -l /usr/local/bin/
+Run the helm version command to ensure Helm is available on the path. This shows the version of Helm that is currently installed.
+
+$ helm version
+Run the helm repo add command with the repo provided for the lab, and make sure the repository is named stable.
+
+$ helm repo add stable https://charts.helm.sh/stable
+Run the helm repo update command to verify the repository is up-to-date.
+
+$ helm repo update
+wget https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz
+tar -xzf helm-v3.9.0-linux-amd64.tar.gz
+mv ./linux-amd64/helm /usr/local/bin/
+helm repo add stable https://charts.helm.sh/stable
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+curl -SSL https://get.docker.com/ | sh 
+
+
+=============================================================================================================================
+AWS CLI install
+sudo apt-get install awscli
+
+==============================================================================================================================
+Installing Vault
+    1  apt install
+    2  sudo apt update && sudo apt install gpg
+    3  wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg >/dev/null
+    4  gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+    5  echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+    6  type vault.
+
+
+create vault folder in the /etc directory for storing the vault configuration files.
+create vault-data folder in the /opt directory for storing the secrets.
+create vault folder in the /logs directory for storing the vault logs.
+
+
+
+Create one config.json file in the /etc/vault path
+
+Listner configure the address and port in which vault will respond to the request
+
+
+{
+"listener": [{
+tcp":
+"address": "0.0.0.0:8200",
+"tls_disable" : 1
+}
+}]
+api_addr": "http://192.168.3.114:8200",
+storage": {
+   "file": {
+   "path": "/opt/vault-data"
+   }
+},
+"max_lease_ttl": "10h",
+"default_lease_ttl": "10h",
+"ui":true
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+Terraform installation
+
+sudo apt-get install python3-pip -y
+sudo pip3 install awscli 
+wget  https://releases.hashicorp.com/terraform/1.0.6/terraform_1.0.6_linux_amd64.zip
+unzip terraform_1.0.6_linux_amd64.zip
+sudo mv terraform /usr/local/bin
+
+-----------------------------------------------------------------------------------------------------------------
+https://openliberty.io/guides/gradle-intro.html#testing-gradle
+https://vegastack.com/tutorials/how-to-install-gradle-on-ubuntu-20-04/
+Gradle Installation
+===================
+sudo apt update
+sudo apt install openjdk-11-jdk
+VERSION=7.6
+wget https://services.gradle.org/distributions/gradle-${VERSION}-bin.zip -P /tmp
+apt install unzip
+sudo unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
+sudo ln -s /opt/gradle/gradle-${VERSION} /opt/gradle/latest
+sudo cat <<EOF>> /etc/profile.d/gradle.sh
+export GRADLE_HOME=/opt/gradle/latest
+export PATH=${GRADLE_HOME}/bin:${PATH}
+EOF
+sudo chmod +x /etc/profile.d/gradle.sh
+source /etc/profile.d/gradle.sh
+gradle -v
+
+
+Installing Azurecli
+https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+
+
+Installing EKSCTL
+
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+3:50
+sudo mv /tmp/eksctl /usr/local/bin
